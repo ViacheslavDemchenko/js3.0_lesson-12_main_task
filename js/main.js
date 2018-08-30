@@ -491,7 +491,6 @@ let persons = document.getElementsByClassName('counter-block-input')[0],
 //Вычисление итоговой суммы с учетом коэффициента выбранного направления путеществия
 			result = total * place.options[place.selectedIndex].value;
 			animateValue('total', 0, result, 2000);//Запуск функции анимации числа
-			// totalValue.innerHTML = total;
 		}
 	});
 
@@ -513,7 +512,6 @@ let persons = document.getElementsByClassName('counter-block-input')[0],
 			total = (daysSum + personsSum) * 4000;//Вычисление итоговой суммы
 //Вычисление итоговой суммы с учетом коэффициента выбранного направления путеществия	
 			result = total * place.options[place.selectedIndex].value;
-			// totalValue.innerHTML = total;
 			animateValue('total', 0, result, 2000);//Запуск функции анимации числа
 		}
 	});
@@ -522,12 +520,13 @@ let persons = document.getElementsByClassName('counter-block-input')[0],
 		if (restDays.value == '' || persons.value == '') {
 			totalValue.innerHTML = 0;
 			total = 0;
+		} else if (restDays.value == 0 || persons.value == 0) {
+			totalValue.innerHTML = 0;
+			total = 0;
 		} else {
-			// a = total;
 //Вычисление итоговой суммы с учетом коэффициента выбранного направления путеществия
 			result = total * place.options[place.selectedIndex].value;
-			animateValue('total', 0, result, 2000);//Запуск функции анимации числа
-			// totalValue.innerHTML = a * this.options[this.selectedIndex].value;	
+			animateValue('total', 0, result, 2000);//Запуск функции анимации числа	
 		}
 	});
 
@@ -547,7 +546,7 @@ function animateValue(id, start, end, duration) {
     let timer = setInterval(function() {
         current += increment;//Увеличение текущего значения на заданный шаг
         element.innerHTML = current;//Вывод текущего числа в элемент на экран
-        if (current === end) {//Обнуление таймера при достижении конечного числа
+        if (current >= end) {//Обнуление таймера при достижении конечного числа
             clearInterval(timer);
         }
     }, stepTime);
